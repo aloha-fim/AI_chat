@@ -60,3 +60,16 @@ async def check_health():
 async def reset_conversation():
     reset_messages()
     return {"response": "conversation reset"}
+
+
+@app.post("/post-audio/")
+async def post_audio(file: UploadFile = File(...)):
+
+    # Convert audio to text
+    # Save the file temporarily
+    with open(file.filename, "wb") as buffer:
+        buffer.write(file.file.read())
+    audio_input = open(file.filename, "rb")
+
+    # decode audio
+    message_decoded = convert_audio_to_text(audio_input)
