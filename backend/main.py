@@ -43,8 +43,20 @@ app.add_middleware(
 )
 
 
-#api routes
+# api routes
 @app.get("/")
 async def root():
     print("fred")
     return {"message": "Hello Fred"}
+
+# Config Routes
+# Check health
+@app.get("/health")
+async def check_health():
+    return {"response": "healthy"}
+
+# Reset Conversation
+@app.get("/reset")
+async def reset_conversation():
+    reset_messages()
+    return {"response": "conversation reset"}
