@@ -71,5 +71,20 @@ async def post_audio(file: UploadFile = File(...)):
         buffer.write(file.file.read())
     audio_input = open(file.filename, "rb")
 
-    # decode audio
+    # decode audio by converting audio into text format
     message_decoded = convert_audio_to_text(audio_input)
+
+    # guard: ensure output
+    if not message_decoded:
+        raise HTTPException(status_code=400, detail="Failed to decode audio")
+
+    # get chat response by taking audio input into text
+    chat_response = get_chat_response(message_decoded)
+
+    # store messages of input text converted from audio and chatgpt response
+    store_messages(message_decoded, chat_response)
+
+    # guard: ensure output
+    if not chat_response:
+        raise HTTPException(status_code=400, detail="Failed chat response")
+
