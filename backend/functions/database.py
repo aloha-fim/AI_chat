@@ -2,6 +2,46 @@ import os
 import json
 import random
 
+# save messages from retrieval later on
+def get_recent_messages():
+
+    # define the file name
+    file_name = "stored_data.json"
+    learn_instruction = {"role": "system",
+                         "content": "You are recommending the user for products and services as a customer service agent at Taeyoung E&C.  You are extremely knowledgable to the operations at Taeyoung E&C and know all of Taeyoung's products and services. You know the operations at Taeyoung, especially within commercial real estate of the DESIAN brand and construction.  You are knowledgeable to South Korea including the geography and weather.  Ask short questions that are relevant to the products and services.  Your name is Shaun.  The user is called Fred.  Keep your answers to under 35 words."}
+
+    # initialize messages
+    messages = []
+
+    # add random element
+    x = random.uniform(0, 1)
+    if x < 0.2:
+        learn_instruction["content"] = learn_instruction["content"] + "Your response will have some sense of empathy. "
+    elif x < 0.5:
+        learn_instruction["content"] = learn_instruction["content"] + "Your response will include an interesting new fact about Taeyoung E&C or Taeyoung Holdings. "
+    else:
+        learn_instruction["content"] = learn_instruction["content"] + "Your response will include a rather interesting question. "
+
+    # Append instruction to message
+    messages.append(learn_instruction)
+
+    # get last messages
+    try:
+        with open(file_name) as user_file:
+            data = json.load(user_file)
+
+            # append last 5 rows of data
+            if data:
+                if len(data) < 5:
+                    for item in data:
+                        messages.append(item)
+                else:
+                    for item in data[-5:]:
+                        messages.append(item)
+    except:
+        pass
+
+
 # save messages for retrieval later on
 def store_messages(request_message, response_message):
 
