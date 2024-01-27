@@ -88,3 +88,16 @@ async def post_audio(file: UploadFile = File(...)):
     if not chat_response:
         raise HTTPException(status_code=400, detail="Failed chat response")
 
+    # convert chat response to audio voice
+    audio_output = convert_audio_to_text(chat_response)
+
+    # guard to ensure output
+    if not audio_output:
+        raise HTTPException(status_code=400, detail="Failed audio output")
+
+    # create a generator that yields chuncks of data
+    def iterfile():
+        yield audio_output
+
+    # Use for post: return output audio
+    return StreamingResponse(iterfile(), media_type="application/octet-stream")
