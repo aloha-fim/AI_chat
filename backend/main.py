@@ -42,18 +42,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+########### CONFIG TEST ##############
 # api routes
+# root with hello world test
 @app.get("/")
 async def root():
     print("fred")
     return {"message": "Hello Fred"}
 
 # Config Routes
-# Check health
+# Check health route as test
 @app.get("/health")
 async def check_health():
     return {"response": "healthy"}
+
+#######################################
 
 # Reset Conversation
 @app.get("/reset")

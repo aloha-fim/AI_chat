@@ -1,5 +1,5 @@
 import openai
-from decouple import from django.conf import settings
+from decouple import config
 
 from functions.database import get_recent_messages
 
