@@ -47,7 +47,7 @@ function Controller() {
                     setMessages(messagesArr);
 
                     // play audio
-                    setIsLoading(fales);
+                    setIsLoading(false);
                     audio.play();
                 })
                 .catch((err: any) => {
@@ -114,7 +114,7 @@ function Controller() {
                 <div className="fixed bottom-0 w-full py-6 border-t text-center bg-gradient-to-r from-sky-500 text-blue-500">
                     <div className="flex justify-center items-center w-full">
                         <div>
-                            <RecordMessage handlestop={handleStop} />
+                            <RecordMessage handleStop={handleStop} />
                         </div>
                     </div>
                 </div>
