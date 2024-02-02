@@ -28,7 +28,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "http://localhost:5174",
-    "http://localhost:2173",
+    "http://localhost:4173",
     "http://localhost:3000",
 ]
 
@@ -44,11 +44,6 @@ app.add_middleware(
 
 ########### CONFIG TEST ##############
 # api routes
-# root with hello world test
-@app.get("/")
-async def root():
-    print("fred")
-    return {"message": "Hello Fred"}
 
 # Config Routes
 # Check health route as test
@@ -92,7 +87,7 @@ async def post_audio(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="Failed chat response")
 
     # convert chat response to audio voice
-    audio_output = convert_audio_to_text(chat_response)
+    audio_output = convert_text_to_speech(chat_response)
 
     # guard to ensure output
     if not audio_output:

@@ -23,7 +23,7 @@ def convert_audio_to_text(audio_file):
 # Takes text from audio recording and feeds to chatGPT
 def get_chat_response(message_input):
 
-    messages = get_chat_response()
+    messages = get_recent_messages()
     user_message = {"role": "user", "content": message_input + "Only say less than 5 words in Korean if speaking in Hawaiian.  The remaining words should be in English"}
     messages.append(user_message)
     print(messages)
