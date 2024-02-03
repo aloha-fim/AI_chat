@@ -41,6 +41,9 @@ def get_recent_messages():
     except:
         pass
 
+    #return messages
+    return messages
+
 
 # save messages for retrieval later on
 def store_messages(request_message, response_message):
