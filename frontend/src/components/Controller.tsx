@@ -29,8 +29,8 @@ const Controller = () => {
         const formData = new FormData();
         formData.append("file", blob, "myFile.wav");
 
-        // send form data to api endpoint "http://localhost:8000/post-audio" http://127.0.0.1:8000/
-        await axios.post("http://127.0.0.1:8000/post-audio", formData, {
+        // send form data to api endpoint
+        await axios.post("http://localhost:8000/post-audio", formData, {
             headers: {
               "Content-Type": "audio/mpeg",
             },
@@ -99,13 +99,13 @@ const Controller = () => {
 
           {messages.length == 0 && !isLoading && (
             <div className="text-center font-light italic mt-10">
-              Send Rachel a message...
+              Ask me about Taeyoung
             </div>
           )}
 
           {isLoading && (
             <div className="text-center font-light italic mt-10 animate-pulse">
-              Aloha. Trying to Answer...
+              Processing
             </div>
           )}
         </div>
