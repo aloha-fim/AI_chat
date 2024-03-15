@@ -2,11 +2,13 @@
 # uvicorn main:app --reload
 
 #import backend modules
+import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
 import openai
+import json
 
 
 # Customer function imports
@@ -59,6 +61,12 @@ async def reset_conversation():
     reset_messages()
     return {"response": "conversation reset"}
 
+# api to send data to app
+@app.post("/uploadfiles/")
+def create_upload_files(upload_file: UploadFile = File(...)):
+    json_data = json.load(upload_file.file)
+    return {"data_in_file": json_data}
+
 
 @app.post("/post-audio/")
 async def post_audio(file: UploadFile = File(...)):
@@ -99,3 +107,4 @@ async def post_audio(file: UploadFile = File(...)):
 
     # Use for post: return output audio
     return StreamingResponse(iterfile(), media_type="application/octet-stream")
+
