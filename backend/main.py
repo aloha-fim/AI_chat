@@ -62,10 +62,14 @@ async def reset_conversation():
     return {"response": "conversation reset"}
 
 # api to send data to app
-@app.post("/uploadfiles/")
-def create_upload_files(upload_file: UploadFile = File(...)):
-    json_data = json.load(upload_file.file)
-    return {"data_in_file": json_data}
+@app.get("/message_api/")
+async def message_api_json():
+    #message_to_api()
+    file_name = "stored_data.json"
+
+    f = open(file_name)
+    data = json.loads(f)
+    return {"data_in_file": data}
 
 
 @app.post("/post-audio/")

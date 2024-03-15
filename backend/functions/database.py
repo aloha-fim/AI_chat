@@ -72,3 +72,12 @@ def reset_messages():
 
     # write an empty file
     open(file_name, "w")
+
+# to api
+#def message_to_api():
+
+#    file_name = "stored_data.json"
+
+#    f = open(file_name)
+#    data = json.loads(f)
+#    print(data)
