@@ -69,8 +69,8 @@ async def message_api_json():
 
     f = open(file_name)
     data = json.loads(f)
-    return {"data_in_file": data}
-
+    #return {"data_in_file": data}
+    return json.dumps(data)
 
 @app.post("/post-audio/")
 async def post_audio(file: UploadFile = File(...)):
